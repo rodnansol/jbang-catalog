@@ -1,0 +1,114 @@
+= Rodnan Sol - JBang Catalog
+:toc:
+
+== How to use this JBang catalog?
+
+If you are not familiar with JBang catalogs please read the following official documentation:
+https://www.jbang.dev/documentation/guide/latest/alias_catalogs.html
+
+== Spring Configuration Property Documenter
+
+This tool uses https://github.com/rodnansol/spring-configuration-property-documenter[Spring Confinguration Property Documeter] and exposes those APIs to make sure you can generate your documentations for your Spring Boot `@ConfigurationProperties` annotation based classes.
+
+Please check the mentioned repository for more information about the tool.
+
+.To generate a simple document:
+[source,shell]
+----
+jbang spring-configuration-property-documenter@rodnansol generate \
+-n "Simple JBang Application" -i spring-configuration-metadata.json \
+-tt HTML \
+-o spring-app-simple-property-docs.html
+----
+
+.To aggregate multiple documents:
+[source,shell]
+----
+jbang spring-configuration-property-documenter@rodnansol aggregate \
+-n "Multi Module Project" \
+-mn "Module A" -i ~/multi-module/multi-module-a \
+-mn "Module B" -i ~/multi-module/multi-module-b \
+-mn "Module C" -i ~/multi-module/multi-module-c \
+-tt HTML \
+-o spring-app-aggregated-property-docs.html
+----
+
+Please use the `help` command to have more information about the tool:
+[source,log]
+----
+❯ jbang spring-configuration-property-documenter@rodnansol generate --help
+Usage: <main class> generate [-hV] [-t[=<template>]] [-tc[=<templateCompiler>]]
+                             -i=<input> [-n=<documentName>] -o=<outputFile>
+                             [-pt=<projectType>] [-tt=<templateType>]
+Documents the incoming input into a file.
+
+Example: spring-configuration-property-documenter@rodnansol document \
+            -n "Header title"  -i ~/module-a \
+            -tt HTML \
+            -o property-docs.html
+
+  -h, --help            Show this help message and exit.
+  -i, --input=<input>   Input file, directory or JAR file
+  -n, --name=<documentName>
+                        Main header name
+  -o, --output=<outputFile>
+                        Output file name
+      -pt, --project-type=<projectType>
+                        Type of the project,
+                        currently supported: MAVEN, GRADLE
+
+  -t, --template[=<template>]
+                        Custom template file
+      -tc, --template-compiler[=<templateCompiler>]
+                        Template's compiler fully qualified name
+      -tt, --template-type=<templateType>
+                        Desired template type, supported:
+                        MARKDOWN, ADOC, HTML, XML
+
+  -V, --version         Print version information and exit.
+
+--------------------------------------------------------------------------
+
+❯ jbang spring-configuration-property-documenter@rodnansol aggregate --help
+Usage: <main class> aggregate [-hV] [-ct[=<contentTemplate>]] [-ft
+                              [=<footerTemplate>]] [-ht[=<headerTemplate>]] [-tc
+                              [=<templateCompiler>]] [-n=<mainName>]
+                              -o=<outputFile> [-pt=<projectType>]
+                              [-tt=<templateType>] -i=<inputs>...
+                              [-i=<inputs>...]... [-mn=<moduleNames>...]...
+Aggregates the incoming inputs into one big file while.
+Please specify the module names for each input with a sequence.
+
+Example: jbang spring-configuration-property-documenter@rodnansol aggregate \
+            -n "Multi module project" \
+            -mn "Module A" -i ~/module-a \
+            -mn "Module B" -i ~/module-b \
+            -mn "Module C" -i ~/module-c \
+            -tt HTML \
+            -o aggregated-property-docs.html
+
+      -ct, --content-template[=<contentTemplate>]
+                             Custom content template file
+      -ft, --footer-template[=<footerTemplate>]
+                             Custom footer template file
+  -h, --help                 Show this help message and exit.
+      -ht, --header-template[=<headerTemplate>]
+                             Custom header template file
+  -i, --inputs=<inputs>...   List of input files, directories or JAR files
+      -mn, --module-names=<moduleNames>...
+                             List of the module names
+  -n, --name=<mainName>      Main header name
+  -o, --output=<outputFile>  Output file name
+      -pt, --project-type=<projectType>
+                             Type of the project,
+                             currently supported: MAVEN, GRADLE
+
+      -tc, --template-compiler[=<templateCompiler>]
+                             Template's compiler fully qualified name
+      -tt, --template-type=<templateType>
+                             Desired template type, supported:
+                             MARKDOWN, ADOC, HTML, XML
+
+  -V, --version              Print version information and exit.
+
+----

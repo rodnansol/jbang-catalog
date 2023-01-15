@@ -1,0 +1,8 @@
+{
+  "aliases" : {
+    "spring-configuration-property-documenter" : {
+      "script-ref" : "SpringConfigurationPropertyDocumenter.java",
+      "description" : "Reads your spring-configuration-metadata.json and generates Markdown/AsciiDoc/HTML/XML based documentation from it."
+    }
+  }
+}
